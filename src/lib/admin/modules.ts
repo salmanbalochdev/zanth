@@ -14,7 +14,7 @@ export const modules = {
   "gallery-albums": { table: "gallery_albums", title: "Gallery albums", fields: ["slug", "title", "description", "cover_path", "status"], required: ["slug", "title"] },
   "downloads": { table: "downloadable_documents", title: "Downloads", fields: ["title", "description", "category", "storage_path", "mime_type", "status"], required: ["title", "storage_path", "mime_type"] },
   "faqs": { table: "faq_items", title: "FAQs", fields: ["question", "answer", "category", "sort_order", "status"], required: ["question", "answer"] },
-  "policies": { table: "school_policies", title: "School policies", fields: ["title", "body", "status"], required: ["title"] },
+  "policies": { table: "school_policies", title: "School policies", fields: ["slug", "title", "body", "version", "status"], required: ["slug", "title"] },
   "admissions": { table: "admission_applications", title: "Admission inquiries", fields: [], required: [] },
   "inquiries": { table: "contact_inquiries", title: "Contact inquiries", fields: [], required: [] },
 } as const;

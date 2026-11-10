@@ -1,1 +1,19 @@
-import type {Metadata} from "next";import Image from "next/image";import Link from "next/link";import {notFound} from "next/navigation";import {PublicPage} from "@/components/shared/public-page";import {ShareLinks} from "@/components/shared/share-links";import {news} from "@/data/public-content";type Props={params:Promise<{slug:string}>};export function generateStaticParams(){return news.map(x=>({slug:x.slug}))}export async function generateMetadata({params}:Props):Promise<Metadata>{const {slug}=await params;const n=news.find(x=>x.slug===slug);return {title:n?.title??"News not found",description:n?.excerpt,openGraph:n?{type:"article",title:n.title,description:n.excerpt,images:n.image?[n.image]:undefined}:undefined}}export default async function ArticlePage({params}:Props){const {slug}=await params;const n=news.find(x=>x.slug===slug);if(!n)notFound();const related=news.filter(x=>x.slug!==slug).slice(0,3);return <PublicPage title={n.title} description={n.excerpt} crumbs={[{label:"News",href:"/news"}]}><article className="mx-auto max-w-4xl"><p className="font-semibold text-secondary">{n.category} · {n.date}</p>{n.image&&<Image src={n.image} alt={n.title} width={1200} height={750} className="mt-7 w-full rounded-3xl object-cover"/>}<div className="mt-9 space-y-6 leading-8 text-slate-700">{n.content.map((p,i)=><p key={i}>{p}</p>)}</div><div className="mt-10"><ShareLinks title={n.title}/></div><h2 className="mt-14 font-heading text-2xl font-bold text-primary">Related stories</h2>{related.length?<ul className="mt-5 space-y-3">{related.map(x=><li key={x.slug}><Link href={`/news/${x.slug}`} className="font-semibold text-secondary">{x.title}</Link></li>)}</ul>:<p className="mt-3 text-slate-600">No related stories are available yet.</p>}<Link href="/news" className="mt-9 inline-flex min-h-11 items-center font-semibold text-secondary">Back to news</Link></article></PublicPage>}
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { PublicPage } from "@/components/shared/public-page";
+import { publishedRows } from "@/lib/public-content";
+type Props = { params: Promise<{ slug: string }> };
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params; const n = (await publishedRows("news_articles"))?.find(x => x.slug === slug);
+  return { title: n?.title ?? "News not found", description: n?.excerpt };
+}
+export default async function ArticlePage({ params }: Props) {
+  const { slug } = await params; const n = (await publishedRows("news_articles"))?.find(x => x.slug === slug);
+  if (!n) notFound();
+  return <PublicPage title={n.title} description={n.excerpt} crumbs={[{ label: "News", href: "/news" }]}>
+    <article className="mx-auto max-w-4xl"><p className="font-semibold text-secondary">{n.category} · {n.published_at?.slice(0,10)}</p>
+    <div className="mt-9 whitespace-pre-wrap leading-8 text-slate-700">{n.body}</div>
+    <Link href="/news" className="mt-9 inline-flex min-h-11 items-center font-semibold text-secondary">Back to news</Link></article>
+  </PublicPage>;
+}

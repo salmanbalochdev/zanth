@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { login } from "./actions";
-
 export default async function AdminLogin({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
   return <section className="mx-auto max-w-md px-5 py-16">
@@ -17,5 +17,6 @@ export default async function AdminLogin({ searchParams }: { searchParams: Promi
       </label>
       <button type="submit" className="w-full rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-800">Sign in</button>
     </form>
+    <Link href="/admin/forgot-password" className="mt-5 inline-block text-sm font-semibold text-secondary">Forgot password?</Link>
   </section>;
 }
