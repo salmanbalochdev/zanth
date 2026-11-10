@@ -1,0 +1,8 @@
+import type {Metadata} from "next";
+import Link from "next/link";
+import {Container} from "@/components/shared/container";
+import {PageHero} from "@/components/shared/page-hero";
+import {CurriculumTabs} from "@/components/academics/curriculum-tabs";
+import {academicContentNotice} from "@/data/academic-extra";
+export const metadata:Metadata={title:"Curriculum",description:"Explore sample curriculum levels and learning objectives; official syllabus awaits verification."};
+export default function CurriculumPage(){return <><PageHero eyebrow="Learning pathways" title="Curriculum" description="Explore example subject areas and learning objectives across academic stages." crumbs={[{label:"Academics",href:"/academics"}]}/><section className="py-20 sm:py-28"><Container><div className="mb-9 max-w-3xl rounded-2xl border-l-4 border-accent bg-mist p-6 leading-7 text-primary">{academicContentNotice}</div><CurriculumTabs/><div className="mt-12 grid gap-6 md:grid-cols-2"><article className="rounded-2xl bg-mist p-8"><h2 className="font-heading text-xl font-bold text-primary">Teaching and assessment</h2><p className="mt-4 leading-8 text-slate-600">Approaches and assessment policies will be added after official confirmation. No examination board or grading system is assumed.</p></article><article className="rounded-2xl bg-mist p-8"><h2 className="font-heading text-xl font-bold text-primary">Syllabus resources</h2><p className="mt-4 leading-8 text-slate-600">No approved downloadable syllabus is currently available. Documents will be linked when provided.</p></article></div><Link href="/academics" className="mt-10 inline-flex min-h-11 items-center font-semibold text-secondary hover:underline">Back to academics</Link></Container></section></>}
