@@ -1,1 +1,30 @@
-import Link from "next/link";import {Container} from "@/components/shared/container";export default function NotFound(){return <section className="bg-mist py-28"><Container className="text-center"><p className="text-sm font-bold uppercase tracking-widest text-secondary">404 · Page not found</p><h1 className="mt-5 font-heading text-4xl font-bold text-primary">We couldn't find that page.</h1><p className="mx-auto mt-5 max-w-xl leading-8 text-slate-600">The page may have moved or may not be available yet.</p><Link href="/" className="mt-9 inline-flex min-h-11 items-center rounded-full bg-secondary px-7 font-semibold text-white">Return home</Link></Container></section>}
+
+import Link from "next/link";
+import { Container } from "@/components/shared/container";
+
+export default function NotFound() {
+  return (
+    <section className="bg-mist py-28">
+      <Container className="text-center">
+        <p className="text-sm font-bold uppercase tracking-widest text-secondary">
+          404 · Page not found
+        </p>
+
+        <h1 className="mt-5 font-heading text-4xl font-bold text-primary">
+          We couldn&apos;t find that page.
+        </h1>
+
+        <p className="mx-auto mt-5 max-w-xl leading-8 text-slate-600">
+          The page may have moved or may not be available yet.
+        </p>
+
+        <Link
+          href="/"
+          className="mt-9 inline-flex min-h-11 items-center rounded-full bg-secondary px-7 font-semibold text-white"
+        >
+          Return home
+        </Link>
+      </Container>
+    </section>
+  );
+}
