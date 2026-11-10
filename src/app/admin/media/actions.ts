@@ -20,7 +20,8 @@ export async function uploadSchoolMedia(data: FormData) {
   const isWebp = String.fromCharCode(...buffer.slice(0,4)) === "RIFF" && String.fromCharCode(...buffer.slice(8,12)) === "WEBP";
   const isAvif = String.fromCharCode(...buffer.slice(4,12)).includes("ftypavif") || String.fromCharCode(...buffer.slice(4,16)).includes("ftypavis");
   const isPdf = String.fromCharCode(...buffer.slice(0,5)) === "%PDF-";
-  if (!({jpg:isJpeg,png:isPng,webp:isWebp,avif:isAvif,pdf:isPdf}[ext])) redirect("/admin/media?error=invalid");
+  const validSignature = (ext === "jpg" && isJpeg) || (ext === "png" && isPng) || (ext === "webp" && isWebp) || (ext === "avif" && isAvif) || (ext === "pdf" && isPdf);
+  if (!validSignature) redirect("/admin/media?error=invalid");
   const path = folder + "/" + crypto.randomUUID() + "." + ext;
   const { error } = await supabase.storage.from("school-public").upload(path, buffer, { contentType: file.type, upsert: false });
   if (error) redirect("/admin/media?error=upload");
