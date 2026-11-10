@@ -30,3 +30,20 @@ export async function saveContent(formData: FormData) {
   revalidatePath("/", "layout");
   redirect("/admin/content/" + key + "?saved=1");
 }
+
+export async function deleteContent(formData: FormData) {
+  const key = String(formData.get("module") ?? "");
+  const mod = getModule(key);
+  if (!mod || mod.fields.length === 0) redirect("/admin");
+  const { supabase } = await requirePermission(modulePermission(key, true));
+  const id = String(formData.get("id") ?? "");
+  const confirmed = String(formData.get("confirm") ?? "");
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id) || confirmed !== "DELETE") {
+    redirect("/admin/content/" + key + "?error=invalid");
+  }
+  const { data, error } = await supabase.from(mod.table).delete().eq("id", id).select("id");
+  if (error || data?.length !== 1) redirect("/admin/content/" + key + "?error=delete");
+  revalidatePath("/admin/content/" + key);
+  revalidatePath("/", "layout");
+  redirect("/admin/content/" + key + "?deleted=1");
+}
