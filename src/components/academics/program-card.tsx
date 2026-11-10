@@ -1,0 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, BookOpenText } from "lucide-react";
+import type { Program } from "@/data/academics";
+export function ProgramCard({ program }: { program: Program }) { return <article className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-soft"><div className="relative h-56 overflow-hidden"><Image src={program.image} alt={`Illustrative classroom photography for ${program.title}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover"/></div><div className="p-7 sm:p-8"><span className="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-secondary/10 text-secondary"><BookOpenText size={23}/></span><h2 className="font-heading text-2xl font-bold text-primary">{program.title}</h2><p className="mt-2 text-xs font-semibold uppercase tracking-wide text-secondary">{program.ageNote}</p><p className="mt-4 text-sm leading-7 text-slate-600">{program.summary}</p><Link href={`/academics/${program.slug}`} className="mt-7 inline-flex min-h-11 items-center gap-2 font-semibold text-secondary hover:underline">Explore program <ArrowUpRight size={17}/></Link></div></article>; }
