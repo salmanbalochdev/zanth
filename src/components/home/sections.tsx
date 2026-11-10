@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CalendarDays, HeartHandshake, Laptop, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
+import { BookOpen, CalendarDays, HeartHandshake, Laptop, ShieldCheck, Sparkles, UsersRound } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { ActionLink } from "@/components/ui/button";
