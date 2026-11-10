@@ -1,59 +1,55 @@
-import { ArrowUpRight, BookOpenText, CalendarDays, ClipboardList, MapPin, PhoneCall, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, ArrowUpRight, BookOpen, CalendarDays, ClipboardList, Mail, MapPin, Phone, Users, GraduationCap, Clock3 } from "lucide-react";
 import { getPublishedSlides } from "@/lib/school-content";
 import { Hero } from "@/components/home/hero";
-import { HomeSections } from "@/components/home/sections";
 import { Container } from "@/components/shared/container";
 import { school } from "@/data/site";
+import { homeContent } from "@/data/home";
 
-const quick = [
-  { number: "01", title: "Admissions", description: "Find admission information and guidance for families.", href: "/admissions", icon: ClipboardList },
-  { number: "02", title: "Academics", description: "Discover our educational focus and evening classes.", href: "/academics", icon: BookOpenText },
-  { number: "03", title: "School Calendar", description: "Explore the school calendar and upcoming information.", href: "/academics/calendar", icon: CalendarDays },
-  { number: "04", title: "Contact the School", description: "Reach our team or find our campus in Jusak.", href: "/contact", icon: PhoneCall },
+const benefits = [
+  { title: "Character & Values", text: "Developing respect, responsibility and confidence.", icon: Users },
+  { title: "Foundational Learning", text: "Reading, writing and comprehension skills.", icon: BookOpen },
+  { title: "Communication Skills", text: "Helping learners express themselves clearly.", icon: GraduationCap },
+  { title: "English & Coaching", text: "Additional learning opportunities in the evening.", icon: Clock3 },
 ];
-
+const links = [
+  { title: "Admission Information", description: "Explore the admission process and requirements.", href: "/admissions", icon: ClipboardList },
+  { title: "Academic Programs", description: "Learn about our educational focus and classes.", href: "/academics", icon: BookOpen },
+  { title: "School Calendar", description: "Find calendar information as it becomes available.", href: "/academics/calendar", icon: CalendarDays },
+  { title: "Contact & Enquiries", description: "Speak with the school about your questions.", href: "/contact", icon: Mail },
+];
 export default async function Home() {
   const slides = await getPublishedSlides();
-  return (
-    <>
-      <Hero slides={slides} />
-      <section aria-labelledby="quick-heading" className="relative z-10 bg-[#f7f8fa] pb-20 pt-14 sm:pb-24 sm:pt-20">
-        <Container>
-          <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <p className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.2em] text-secondary">
-                <Sparkles size={15} aria-hidden="true" /> Explore Zanth
-              </p>
-              <h2 id="quick-heading" className="font-heading text-3xl font-extrabold leading-tight tracking-tight text-primary sm:text-4xl lg:text-5xl">
-                Everything you need, <span className="text-secondary">in one place.</span>
-              </h2>
-              <p className="mt-5 max-w-xl text-base leading-8 text-slate-600">A simple starting point for parents, students and visitors.</p>
-            </div>
-            <Link href="/about" className="group inline-flex min-h-11 items-center gap-2 self-start rounded-full border border-primary/15 bg-white px-5 py-3 text-sm font-bold text-primary transition hover:border-secondary hover:text-secondary">
-              Get to know us <ArrowUpRight size={17} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-            </Link>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {quick.map(item => (
-              <Link key={item.title} href={item.href} className="group relative flex min-h-[245px] flex-col overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white p-7 shadow-[0_10px_35px_rgba(20,45,80,.035)] transition-all duration-300 hover:-translate-y-1 hover:border-secondary/30 hover:shadow-[0_20px_50px_rgba(20,45,80,.1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-secondary">
-                <div className="flex items-start justify-between">
-                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary/[.06] text-primary transition-colors group-hover:bg-secondary group-hover:text-white"><item.icon size={25} strokeWidth={1.7} aria-hidden="true" /></span>
-                  <span className="font-heading text-sm font-bold text-slate-300">{item.number}</span>
-                </div>
-                <h3 className="mt-8 font-heading text-xl font-extrabold tracking-tight text-primary">{item.title}</h3>
-                <p className="mt-2 max-w-xs text-sm leading-7 text-slate-600">{item.description}</p>
-                <span className="mt-auto flex items-center justify-between pt-7 text-xs font-bold uppercase tracking-widest text-secondary">Explore <ArrowUpRight size={19} className="transition group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" /></span>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-[#dce5ee] bg-[#edf3f7] px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3"><MapPin size={20} className="mt-1 shrink-0 text-secondary" aria-hidden="true" /><div><p className="font-heading font-bold text-primary">Visit Zanth Public School Jusak</p><p className="mt-1 text-sm leading-6 text-slate-600">{school.address}</p></div></div>
-            <Link href="/contact" className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-bold text-secondary hover:underline">Contact us <ArrowUpRight size={17} aria-hidden="true" /></Link>
-          </div>
-        </Container>
-      </section>
-      <HomeSections />
-    </>
-  );
+  return <>
+    <div className="bg-[#f7f4ee] px-3 pb-4 pt-3 sm:px-6 sm:pb-8 sm:pt-5">
+      <Container className="!max-w-[1440px] !px-0"><div className="overflow-hidden rounded-[22px] bg-white p-2 shadow-[0_16px_55px_rgba(21,59,75,.08)] sm:rounded-[28px] sm:p-3">
+        <Hero slides={slides}/>
+      </div></Container>
+    </div>
+    <section className="bg-white py-20 sm:py-28" aria-labelledby="welcome-heading">
+      <Container className="grid items-center gap-12 lg:grid-cols-[1fr_.9fr] lg:gap-20">
+        <div><p className="mb-4 text-xs font-extrabold uppercase tracking-[.2em] text-secondary">Our story</p>
+          <h2 id="welcome-heading" className="school-display max-w-[720px] text-4xl uppercase text-primary sm:text-5xl lg:text-6xl">Welcome to <span className="text-secondary">Zanth Public</span> School Jusak</h2>
+          <p className="mt-7 max-w-xl text-base leading-8 text-slate-600">{school.vision} Our educational focus includes behaviour development, reading, writing, comprehension and communication skills.</p>
+          <p className="mt-4 max-w-xl text-base leading-8 text-slate-600">We also offer English language and coaching classes in the evening shift.</p>
+          <Link href="/about" className="mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white hover:bg-[#b87629]">Discover our school <ArrowUpRight size={17}/></Link>
+        </div>
+        <div className="relative"><div className="absolute -right-3 -top-3 h-full w-full rounded-[26px] border-2 border-secondary/25" aria-hidden="true"/><div className="relative overflow-hidden rounded-[26px] bg-mist"><Image src={homeContent.about.image} alt="Illustrative learning environment, not a verified photo of Zanth School" width={1200} height={900} sizes="(max-width: 1024px) 100vw, 45vw" className="aspect-[4/3] w-full object-cover"/><span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-primary">Illustrative image</span></div></div>
+      </Container>
+    </section>
+    <section className="bg-[#122b36] py-20 text-white sm:py-24" aria-labelledby="why-heading">
+      <Container><p className="text-xs font-extrabold uppercase tracking-[.2em] text-accent">Our educational focus</p><h2 id="why-heading" className="school-display mt-4 text-4xl uppercase sm:text-5xl">Why learn with us?</h2>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{benefits.map((b,i)=><article key={b.title} className="school-card relative flex min-h-[260px] flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/[.07] p-6"><span className="text-xs font-bold tracking-widest text-accent">0{i+1}</span><b.icon className="mt-8 text-accent" size={32} strokeWidth={1.5}/><h3 className="mt-auto pt-7 font-heading text-xl font-extrabold">{b.title}</h3><p className="mt-3 text-sm leading-6 text-white/70">{b.text}</p></article>)}</div>
+      </Container>
+    </section>
+    <section className="bg-[#f7f4ee] py-20 sm:py-28" aria-labelledby="links-heading"><Container><p className="text-xs font-extrabold uppercase tracking-[.2em] text-secondary">Explore our school</p><h2 id="links-heading" className="school-display mt-4 text-4xl uppercase text-primary sm:text-5xl">Quick links to connect</h2>
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{links.map((item,i)=><Link key={item.href} href={item.href} className={`school-card group flex min-h-[260px] flex-col rounded-2xl border p-6 shadow-sm ${i===1?"border-secondary bg-secondary text-white":"border-slate-200 bg-white text-primary"}`}><item.icon size={30} strokeWidth={1.5} className={i===1?"text-white":"text-secondary"}/><h3 className="mt-8 font-heading text-lg font-extrabold uppercase">{item.title}</h3><p className={`mt-3 text-sm leading-6 ${i===1?"text-white/85":"text-slate-600"}`}>{item.description}</p><span className={`mt-auto inline-flex items-center gap-2 pt-6 text-xs font-bold uppercase tracking-wide ${i===1?"text-white":"text-secondary"}`}>Explore <ArrowUpRight size={16} className="transition group-hover:translate-x-1"/></span></Link>)}</div></Container></section>
+    <section className="border-y border-secondary/20 bg-white py-5" aria-label="School motto"><div className="overflow-hidden whitespace-nowrap text-center font-heading text-sm font-extrabold uppercase tracking-[.2em] text-primary sm:text-lg">✦ &nbsp; Let&apos;s Educate &nbsp; ✦ &nbsp; Zanth Public School Jusak &nbsp; ✦ &nbsp; Let&apos;s Educate &nbsp; ✦</div></section>
+    <section className="bg-[#f7f4ee] py-20 sm:py-28" aria-labelledby="programs-heading"><Container><p className="text-xs font-extrabold uppercase tracking-[.2em] text-secondary">Our programs</p><h2 id="programs-heading" className="school-display mt-4 text-4xl uppercase text-primary sm:text-5xl">A journey of education</h2><div className="mt-10 grid items-center gap-10 rounded-[28px] bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-2"><div className="relative overflow-hidden rounded-2xl bg-mist"><Image src={homeContent.about.image} alt="Illustrative educational image" width={1200} height={900} sizes="(max-width: 1024px) 100vw, 50vw" className="aspect-[4/3] w-full object-cover"/></div><div><span className="inline-flex rounded-full bg-secondary/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-secondary">Evening shift</span><h3 className="school-display mt-6 text-3xl uppercase text-primary sm:text-4xl">English Language &amp; Coaching Classes</h3><p className="mt-5 leading-8 text-slate-600">English language and coaching classes are offered in the evening shift. Contact the school for current availability, schedules and enrollment details.</p><Link href="/academics" className="mt-8 inline-flex items-center gap-3 rounded-full bg-secondary px-6 py-3 text-sm font-bold text-white hover:bg-[#b87629]">Explore programs <ArrowRight size={17}/></Link></div></div></Container></section>
+    <section className="bg-white py-20 sm:py-24" aria-labelledby="calendar-heading"><Container className="grid items-center gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><p className="text-xs font-extrabold uppercase tracking-[.2em] text-secondary">School information</p><h2 id="calendar-heading" className="school-display mt-4 text-4xl uppercase text-primary sm:text-5xl">Academic calendar</h2><p className="mt-6 leading-8 text-slate-600">Official term dates and school events will be published when confirmed. Check the calendar page for the latest information.</p><Link href="/academics/calendar" className="mt-7 inline-flex items-center gap-2 font-bold text-secondary hover:underline">View calendar <ArrowUpRight size={18}/></Link></div><div className="rounded-[28px] border border-slate-200 bg-[#f7f4ee] p-8 sm:p-12"><CalendarDays size={50} strokeWidth={1.3} className="text-secondary"/><h3 className="mt-6 font-heading text-2xl font-bold text-primary">School dates and events</h3><p className="mt-4 leading-7 text-slate-600">No official dates have been published yet. This section will show confirmed calendar information rather than sample dates.</p></div></Container></section>
+    <section className="bg-[#f7f4ee] py-20 sm:py-24" aria-labelledby="updates-heading"><Container><div className="grid gap-8 lg:grid-cols-2"><div><p className="text-xs font-extrabold uppercase tracking-[.2em] text-secondary">Community</p><h2 id="updates-heading" className="school-display mt-4 text-4xl uppercase text-primary sm:text-5xl">School news &amp; events</h2><p className="mt-5 max-w-lg leading-8 text-slate-600">Stay connected with announcements and activities shared by Zanth Public School Jusak.</p><Link href="/news" className="mt-7 inline-flex items-center gap-2 font-bold text-secondary hover:underline">Explore school news <ArrowUpRight size={18}/></Link></div><div className="rounded-[26px] bg-white p-8 shadow-sm"><CalendarDays className="text-secondary" size={34}/><h3 className="mt-5 font-heading text-2xl font-bold text-primary">Official updates</h3><p className="mt-4 leading-7 text-slate-600">Verified announcements and upcoming events will appear here once published by the school.</p></div></div></Container></section>
+    <section className="bg-[#122b36] px-4 py-14 sm:px-8 sm:py-20"><Container><div className="rounded-[28px] border border-white/15 bg-white/[.06] px-6 py-14 text-center text-white sm:px-12"><p className="text-xs font-bold uppercase tracking-[.22em] text-accent">Begin your journey</p><h2 className="school-display mx-auto mt-5 max-w-3xl text-4xl uppercase sm:text-6xl">Let&apos;s build a brighter future through education.</h2><p className="mx-auto mt-6 max-w-xl leading-8 text-white/75">Connect with our team to learn more about Zanth Public School Jusak.</p><Link href="/contact" className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-secondary px-7 py-3 text-sm font-bold text-white hover:bg-[#b87629]">Contact the school <ArrowUpRight size={17}/></Link></div></Container></section>
+    <section className="bg-[#f7f4ee] py-8"><Container className="flex flex-col gap-4 text-sm text-primary sm:flex-row sm:items-center sm:justify-between"><span className="flex items-start gap-2"><MapPin size={18} className="shrink-0 text-secondary"/>{school.address}</span><div className="flex flex-wrap gap-5"><a href={`tel:${school.contact.phone}`} className="inline-flex items-center gap-2 font-semibold hover:text-secondary"><Phone size={16}/>{school.contact.phone}</a><a href={`mailto:${school.contact.email}`} className="inline-flex items-center gap-2 font-semibold hover:text-secondary"><Mail size={16}/>{school.contact.email}</a></div></Container></section>
+  </>;
 }
