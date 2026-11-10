@@ -28,10 +28,10 @@ export default async function Gallery() {
   return <PublicPage title="School Gallery" description="Approved school photographs and activities.">
     {images.length === 0
       ? <p className="rounded-2xl bg-mist p-8 text-slate-700">No school photographs have been approved for publication yet.</p>
-      : <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{images.map(item =>
-        <figure key={item.id} className="overflow-hidden rounded-2xl bg-mist">
-          <div className="relative aspect-[4/3]"><Image src={item.url!} alt={item.alt_text || "School activity"} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" unoptimized/></div>
-          {item.alt_text && <figcaption className="p-4 text-sm text-slate-700">{item.alt_text}</figcaption>}
+      : <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{images.map(item =>
+        <figure key={item.id} className="group overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_10px_30px_rgba(7,31,69,.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(7,31,69,.12)]">
+          <div className="relative aspect-square overflow-hidden bg-mist"><Image src={item.url!} alt={item.alt_text || "School activity"} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.04]" unoptimized/></div>
+          {item.alt_text && <figcaption className="border-t border-slate-100 p-5 text-sm font-semibold text-primary">{item.alt_text}</figcaption>}
         </figure>
       )}</div>}
   </PublicPage>;
