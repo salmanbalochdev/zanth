@@ -1,0 +1,1 @@
+export default function Sent() { return <section className="mx-auto max-w-xl px-5 py-20"><h1 className="text-3xl font-bold">Check your email</h1><p className="mt-3 text-slate-600">If an account exists and password recovery is configured, a reset message will be sent.</p></section>; }
