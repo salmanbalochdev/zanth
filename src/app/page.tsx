@@ -44,7 +44,7 @@ export default async function Home() {
   return <>
     <div className="bg-[#f7f4ee] px-3 pb-4 pt-3 sm:px-6 sm:pb-8 sm:pt-5">
       <Container className="!max-w-[1440px] !px-0"><div className="overflow-hidden rounded-[22px] bg-white p-2 shadow-[0_16px_55px_rgba(21,59,75,.08)] sm:rounded-[28px] sm:p-3">
-        <Hero slides={slides}/>
+        <Hero slides={slides} schoolPhotos={galleryPhotos}/>
       </div></Container>
     </div>
     <section className="bg-white py-20 sm:py-28" aria-labelledby="welcome-heading">
