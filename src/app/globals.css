@@ -7,3 +7,5 @@ body { background: #fff; color: #1B2636; }
 ::selection { background: #C8A45D; color: #142D50; }
 :focus-visible { outline: 3px solid #238A76; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+[aria-current="page"] { text-decoration: underline; text-underline-offset: 5px; }
