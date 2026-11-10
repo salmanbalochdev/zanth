@@ -1,0 +1,1 @@
+export default function Loading(){return <div role="status" aria-label="Loading page" className="mx-auto max-w-6xl animate-pulse px-5 py-20"><div className="h-12 max-w-lg rounded-xl bg-mist"/><div className="mt-7 h-5 max-w-2xl rounded bg-mist"/><div className="mt-10 grid gap-5 sm:grid-cols-3">{[1,2,3].map(i=><div key={i} className="h-52 rounded-2xl bg-mist"/>)}</div></div>}

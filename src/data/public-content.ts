@@ -1,0 +1,10 @@
+export type NewsItem={slug:string;title:string;category:string;date:string;excerpt:string;content:string[];image?:string;keywords?:string[]};
+export type Announcement={slug:string;title:string;category:string;date:string;summary:string;content:string[];important?:boolean;documents?:{title:string;url:string}[]};
+export type PublicDocument={title:string;description:string;category:string;type:string;url:string;size?:string;updated?:string};
+export type Policy={slug:string;title:string;description:string;body:string[];updated?:string};
+export const news:NewsItem[]=[];
+export const announcements:Announcement[]=[];
+export const documents:PublicDocument[]=[];
+export const policies:Policy[]=[];
+export const publicNotice="Official school content has not yet been supplied. This page will be populated only after verification and approval.";
+export const schoolInformation=[{title:"School hours",description:"Official office and teaching hours are awaiting confirmation."},{title:"Academic sessions",description:"The school's session dates have not been supplied."},{title:"Uniform",description:"No approved uniform guidance has been supplied."},{title:"Transport",description:"Transport routes and availability have not been confirmed."},{title:"School rules",description:"Approved school rules are not yet available."}];
