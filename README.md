@@ -1,7 +1,23 @@
-# Premium School Website
+# Premium School Website — Phase 1
 
-Phase 1 frontend built with Next.js App Router, TypeScript, Tailwind CSS, Motion, Lucide icons, and accessible components.
+A Next.js App Router school website frontend, designed with TypeScript, Tailwind CSS, Motion, Lucide React and reusable UI components.
 
-All school identity, contact information and photography are illustrative placeholders until confirmed. No Supabase connection, authentication or admin functionality is implemented.
+## Run locally
 
-Run `npm install`, `npm run lint`, `npm run typecheck`, and `npm run build`.
+```bash
+npm install
+npm run dev
+npm run lint
+npm run typecheck
+npm run build
+```
+
+## Phase 1 scope
+
+- Responsive desktop and mobile header with accessible navigation and dropdowns
+- Auto-playing hero carousel with pause, previous, next and direct-slide controls
+- Premium footer and reusable design system
+- Centralized sample content in `src/data/site.ts`
+- Homepage quick links and a custom 404 state
+
+All school details are illustrative placeholders; the site is set to noindex until real school information is verified. No authentication, database, admin or form submissions are implemented. Routes to later-phase pages currently show the custom 404 page.
