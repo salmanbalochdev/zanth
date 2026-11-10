@@ -1,10 +1,59 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 import type { PublicSlide } from "@/lib/school-content";
 import { publicMediaUrl } from "@/lib/public-media-url";
-import { Container } from "@/components/shared/container";
-import { ActionLink } from "@/components/ui/button";
-export function Hero({ slides }: { slides: PublicSlide[] }) { const [active, setActive] = useState(0); const [paused, setPaused] = useState(false); const reduced = useReducedMotion(); useEffect(() => { if(paused || reduced || slides.length < 2) return; const timer = window.setInterval(() => setActive(i => (i + 1) % slides.length), 6500); return () => window.clearInterval(timer); }, [paused, reduced, slides.length]); const slide = slides[active] ?? null; const move = (direction: number) => setActive(i => (i + direction + slides.length) % slides.length); if (!slide) return <section aria-label="School introduction" className="rounded-[20px] bg-primary py-28 text-white"><Container><p className="text-sm uppercase tracking-widest text-accent">Let&apos;s Educate</p><h1 className="mt-5 font-heading text-4xl font-bold sm:text-6xl">Zanth Public School Jusak</h1><p className="mt-6 max-w-xl text-lg text-white/80">To create a well-behaved and well-educated society.</p></Container></section>; const slideImage = publicMediaUrl(slide.image_path); return <section aria-roledescription="carousel" aria-label="School introduction" className="relative isolate min-h-[520px] overflow-hidden rounded-[20px] bg-primary text-white sm:min-h-[600px] lg:min-h-[650px]" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)}><AnimatePresence initial={false} mode="sync">{slideImage && <motion.div key={slide.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduced ? 0 : 1 }} className="absolute inset-0 -z-20"><Image src={slideImage} alt={slide.title} fill priority={active === 0} sizes="100vw" className="object-cover object-center" unoptimized /></motion.div>}</AnimatePresence><div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#0b2734]/95 via-[#153b4b]/75 to-[#153b4b]/20"/><div className="absolute inset-x-0 bottom-0 -z-10 h-44 bg-gradient-to-t from-primary/70 to-transparent"/><Container className="flex min-h-[520px] items-center pb-24 pt-20 sm:min-h-[600px] lg:min-h-[650px]"><div className="max-w-[760px]"><p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[.24em] text-accent"><span className="h-px w-9 bg-accent"/>Zanth Public School Jusak</p><AnimatePresence mode="wait"><motion.div key={active} initial={{ opacity: 0, y: reduced ? 0 : 22 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduced ? 0 : -15 }} transition={{ duration: reduced ? 0 : .55 }}><h1 className="school-display max-w-[800px] text-[clamp(2.7rem,6vw,5.7rem)] uppercase">{slide.title}</h1><p className="mt-7 max-w-[600px] text-base leading-8 text-white/85 sm:text-lg">{slide.subtitle}</p></motion.div></AnimatePresence><div className="mt-10 flex flex-wrap items-center gap-4"><ActionLink href="/about" variant="light" arrow>Explore School</ActionLink><ActionLink href="/admissions" variant="outline" arrow>Admission Information</ActionLink></div></div></Container><Container className="absolute inset-x-0 bottom-8 flex items-center justify-between gap-4"><div className="flex items-center gap-2" aria-label="Choose slide">{slides.map((s, i) => <button type="button" key={s.id} onClick={() => setActive(i)} aria-label={`Show slide ${i + 1}`} aria-current={i === active ? "true" : undefined} className={`relative min-h-11 min-w-11 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${i === active ? "w-10 bg-accent" : "w-2.5 bg-white/50 hover:bg-white"}`}/>)}</div><div className="flex items-center gap-2"><button type="button" aria-label={paused ? "Resume slideshow" : "Pause slideshow"} onClick={() => setPaused(!paused)} className="grid h-11 w-11 place-items-center rounded-full border border-white/50 hover:bg-white/15">{paused ? <Play size={16}/> : <Pause size={16}/>}</button><button type="button" aria-label="Previous slide" onClick={() => move(-1)} className="grid h-11 w-11 place-items-center rounded-full border border-white/50 hover:bg-white/15"><ArrowLeft size={17}/></button><button type="button" aria-label="Next slide" onClick={() => move(1)} className="grid h-11 w-11 place-items-center rounded-full border border-white/50 hover:bg-white/15"><ArrowRight size={17}/></button></div></Container></section>; }
+import Link from "next/link";
+
+export function Hero({ slides }: { slides: PublicSlide[] }) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reduced = useReducedMotion();
+  const hasMultiple = slides.length > 1;
+  useEffect(() => {
+    if (paused || reduced || !hasMultiple) return;
+    const timer = window.setInterval(() => setActive(i => (i + 1) % slides.length), 6500);
+    return () => window.clearInterval(timer);
+  }, [paused, reduced, hasMultiple, slides.length]);
+  const slide = slides[active] ?? null;
+  const image = slide ? publicMediaUrl(slide.image_path) : null;
+  const move = (direction: number) => setActive(i => (i + direction + slides.length) % slides.length);
+
+  return (
+    <section aria-label="Zanth Public School introduction" aria-roledescription={hasMultiple ? "carousel" : undefined}
+      className="relative isolate flex min-h-[460px] overflow-hidden rounded-[18px] bg-primary text-white sm:min-h-[540px] lg:min-h-[620px]"
+      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)}
+      >
+      {image && (
+        <AnimatePresence initial={false}>
+          <motion.div key={slide?.id} className="absolute inset-0 -z-20" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:reduced ? 0 : .65}}>
+            <Image src={image} alt={slide?.title || "Zanth Public School"} fill priority={active===0} sizes="(max-width: 768px) 100vw, 95vw" className="object-cover object-center" unoptimized/>
+          </motion.div>
+        </AnimatePresence>
+      )}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071526]/95 via-[#071F45]/70 to-[#071F45]/20" aria-hidden="true"/>
+      <div className="relative flex w-full items-center px-6 pb-24 pt-20 sm:px-12 lg:px-[7%]">
+        <div className="max-w-[570px]">
+          <p className="mb-4 text-[11px] font-extrabold uppercase tracking-[.22em] text-accent sm:text-xs">Let&apos;s Educate</p>
+          <h1 className="school-display text-[clamp(3.8rem,8vw,7.5rem)] uppercase leading-[.83] text-white">Zanth<br/>Public<br/>School</h1>
+          <p className="mt-6 text-sm font-semibold tracking-wide text-white/85 sm:text-base">Jusak, Turbat, Kech</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/contact" className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-6 py-3 text-xs font-extrabold uppercase tracking-wide text-primary transition hover:bg-[#D9AA0B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Enquire Now</Link>
+            <Link href="/about" className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-xs font-extrabold uppercase tracking-wide text-primary transition hover:bg-[#F7F5EF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">About Us</Link>
+          </div>
+        </div>
+      </div>
+      {hasMultiple && <div className="absolute bottom-5 left-6 right-6 flex items-center justify-between gap-3 sm:left-12 sm:right-12">
+        <div className="flex items-center gap-2" aria-label="Choose school image">{slides.map((s,i)=><button key={s.id} type="button" onClick={()=>setActive(i)} aria-label={`Show image ${i+1}`} aria-current={i===active?"true":undefined} className={`h-11 min-w-11 rounded-full border border-white/30 px-4 text-xs font-bold transition ${i===active?"bg-accent text-primary":"bg-black/20 text-white hover:bg-white/20"}`}>{String(i+1).padStart(2,"0")}</button>)}</div>
+        <div className="flex gap-2">
+          <button type="button" aria-label={paused?"Resume slideshow":"Pause slideshow"} onClick={()=>setPaused(!paused)} className="grid h-11 w-11 place-items-center rounded-full border border-white/40 bg-black/20 hover:bg-white/20">{paused?<Play size={16}/>:<Pause size={16}/>}</button>
+          <button type="button" aria-label="Previous image" onClick={()=>move(-1)} className="grid h-11 w-11 place-items-center rounded-full border border-white/40 bg-black/20 hover:bg-white/20"><ArrowLeft size={16}/></button>
+          <button type="button" aria-label="Next image" onClick={()=>move(1)} className="grid h-11 w-11 place-items-center rounded-full border border-white/40 bg-black/20 hover:bg-white/20"><ArrowRight size={16}/></button>
+        </div>
+      </div>}
+    </section>
+  );
+}
