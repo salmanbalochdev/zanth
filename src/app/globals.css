@@ -3,14 +3,14 @@
 @tailwind utilities;
 :root { color-scheme: light; }
 html { scroll-behavior: smooth; }
-body { background: #fff; color: #18313C; }
-::selection { background: #E7BA73; color: #153B4B; }
-:focus-visible { outline: 3px solid #D18B36; outline-offset: 3px; }
+body { background: #fff; color: #20242B; }
+::selection { background: #F5C518; color: #071F45; }
+:focus-visible { outline: 3px solid #D9AA0B; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
 [aria-current="page"] { text-decoration: underline; text-underline-offset: 5px; }
 
 /* School editorial layout */
-.school-display { font-family: var(--font-jakarta), sans-serif; font-stretch: condensed; letter-spacing: -.055em; line-height: 1.06; font-weight: 900; }
+.school-display { font-family: var(--font-barlow-condensed), "Arial Narrow", sans-serif; font-stretch: condensed; letter-spacing: -.025em; line-height: 1.06; font-weight: 900; }
 .school-card { transition: transform .25s ease, box-shadow .25s ease; }
-.school-card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(21,59,75,.13); }
+.school-card:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(7,31,69,.13); }
