@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { modules } from "@/lib/admin/modules";
 import { requireAdmin } from "@/lib/admin/access";
 import { logout } from "./login/actions";
 
@@ -30,6 +32,6 @@ export default async function AdminOverview() {
         {item.error && <p className="mt-2 text-xs text-red-700">Permission or query error</p>}
       </article>)}
     </div>
-    <p className="mt-8 text-sm text-slate-600">Only real Supabase records are counted. Management modules will be added after permissions are verified.</p>
+    <section className="mt-10"><h2 className="text-2xl font-bold text-primary">Manage school website</h2><p className="mt-2 text-sm text-slate-600">Manage approved content and upload school media. Permissions and database RLS apply to every operation.</p><div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"><Link href="/admin/media" className="rounded-xl border border-secondary bg-mist p-5 font-semibold text-primary hover:shadow-md">Upload school images and PDFs</Link>{Object.entries(modules).map(([key,mod])=><Link key={key} href={`/admin/content/${key}`} className="rounded-xl border bg-white p-5 font-semibold text-primary hover:bg-mist">{mod.title}</Link>)}</div></section>
   </section>;
 }
