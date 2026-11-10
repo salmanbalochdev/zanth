@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { BookOpen, GraduationCap, Lightbulb, Users } from "lucide-react";
+import { BookOpen, MessageCircle, PenLine, HeartHandshake } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { PageHero } from "@/components/shared/page-hero";
-import { ProgramCard } from "@/components/academics/program-card";
-import { curriculumNote, programs } from "@/data/academics";
-export const metadata: Metadata = { title: "Academics", description: "Explore illustrative academic stages and teaching approaches. Actual classes and curriculum require school confirmation." };
-const pillars = [{title:"Strong foundations", icon:BookOpen, text:"Developing core literacy, numeracy and communication skills."},{title:"Active discovery", icon:Lightbulb, text:"Exploring ideas through discussion, creativity and practical work."},{title:"Whole-child growth", icon:Users, text:"Supporting confidence, wellbeing and collaboration."}];
-export default function AcademicsPage() { return <><PageHero eyebrow="Learning at every stage" title="Academics" description="Explore a sample learning journey designed to illustrate how the school's academic programs can be presented. Actual offerings require confirmation."/><section id="programs" className="scroll-mt-36 py-20 sm:py-28"><Container><p className="text-xs font-bold uppercase tracking-[.22em] text-secondary">Academic pathways</p><h2 className="mt-4 font-heading text-3xl font-bold text-primary sm:text-4xl">Find the right stage of learning.</h2><p className="mt-5 max-w-3xl leading-8 text-slate-600">{curriculumNote}</p><div className="mt-12 grid gap-7 md:grid-cols-2">{programs.map(program => <ProgramCard key={program.slug} program={program}/>)}</div></Container></section><section className="bg-mist py-20 sm:py-24"><Container><div className="flex items-center gap-4"><GraduationCap size={34} className="text-secondary"/><h2 className="font-heading text-3xl font-bold text-primary">Our learning approach</h2></div><div className="mt-10 grid gap-6 md:grid-cols-3">{pillars.map(p => <div key={p.title} className="rounded-2xl bg-white p-8 shadow-soft"><p.icon size={28} className="text-secondary"/><h3 className="mt-5 font-heading text-xl font-bold text-primary">{p.title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{p.text}</p></div>)}</div></Container></section></>; }
+const focus = [
+  { title: "Behaviour Development", icon: HeartHandshake },
+  { title: "Reading and Writing Skills", icon: PenLine },
+  { title: "Comprehension Skills", icon: BookOpen },
+  { title: "Communication Skills", icon: MessageCircle },
+];
+export const metadata: Metadata = { title: "Academics", description: "Educational focus and evening English Language & Coaching Classes at Zanth Public School Jusak." };
+export default function AcademicsPage() { return <>
+  <PageHero eyebrow="Learning" title="Academics" description="Developing behaviour, literacy, comprehension and communication skills."/>
+  <section id="programs" className="scroll-mt-32 py-16 sm:py-24"><Container><h2 className="font-heading text-3xl font-bold text-primary">Educational Focus</h2><div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{focus.map(item => <article key={item.title} className="rounded-2xl bg-mist p-7"><item.icon className="text-secondary" size={30}/><h3 className="mt-5 font-heading text-lg font-bold text-primary">{item.title}</h3></article>)}</div></Container></section>
+  <section className="bg-mist py-16 sm:py-24"><Container><h2 className="font-heading text-3xl font-bold text-primary">Zanth English Language &amp; Coaching Classes</h2><p className="mt-5 max-w-3xl leading-8 text-slate-700">English language and coaching classes are offered in the evening shift. Contact the school for current schedules, eligibility and enrollment information.</p></Container></section>
+</>; }
