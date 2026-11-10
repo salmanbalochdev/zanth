@@ -17,7 +17,6 @@ export default async function Gallery() {
       const { data, error } = await db.from("gallery_media")
         .select("id,storage_path,alt_text")
         .eq("status", "published")
-        .eq("media_type", "image")
         .order("sort_order", { ascending: true }).limit(100);
       if (error) throw error;
       media = data ?? [];
